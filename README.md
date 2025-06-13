@@ -49,7 +49,6 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
 
 > [!TIP]
 > Credentials are stored in the `~/s3sql` directory. 
->
 > I.E. Windows = `C:\Users\Ian\s3sql\credentials` 
 > MacOS = `/Users/Ian/s3sql`
 
@@ -162,6 +161,10 @@ project/
 4. Commit your changes (`git commit -m 'Add your feature'`)
 5. Push to the branch (`git push origin feature/your-feature`)
 6. Create a Pull Request
+
+## PyPI
+
+https://pypi.org/project/s3sql/
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
