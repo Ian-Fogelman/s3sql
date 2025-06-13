@@ -31,7 +31,9 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
    ```
 
 > [!TIP]
-> Credentials are stored in the `~/s3sql` directory. I.E. Windows = `C:\Users\Ian\s3sql\credentials` MacOS = `/Users/Ian/s3sql`
+> Credentials are stored in the `~/s3sql` directory. 
+> I.E. Windows = `C:\Users\Ian\s3sql\credentials` 
+> MacOS = `/Users/Ian/s3sql`
 
 4. Set the AWS access secret with:
 
@@ -46,7 +48,9 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
    ```
 
 > [!TIP]
-> Credentials are stored in the `~/s3sql` directory. I.E. Windows = `C:\Users\Ian\s3sql\credentials` MacOS = `/Users/Ian/s3sql`
+> Credentials are stored in the `~/s3sql` directory. 
+> I.E. Windows = `C:\Users\Ian\s3sql\credentials` 
+> MacOS = `/Users/Ian/s3sql`
 
 5. List objects available. For example, to list the objects in the bucket named: `osg-repo-scan-data`:
 
