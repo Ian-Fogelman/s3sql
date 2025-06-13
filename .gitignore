@@ -7,3 +7,4 @@ mycli.spec
 dist/
 .env
 __pycache__
+notes.txt
