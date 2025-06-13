@@ -30,9 +30,9 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
    API secret saved successfully!
    ```
 
-   > [!TIP]
-   > Credentials are stored in the `~/s3sql` directory. I.E. Windows = `C:\Users\Ian\s3sql\credentials` MacOS = `/Users/Ian/s3sql`
-   
+> [!TIP]
+> Credentials are stored in the `~/s3sql` directory. I.E. Windows = `C:\Users\Ian\s3sql\credentials` MacOS = `/Users/Ian/s3sql`
+
 4. Set the AWS access secret with:
 
    ```bash
@@ -45,8 +45,8 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
    API key saved successfully!
    ```
 
-   > [!TIP]
-   > Credentials are stored in the `~/s3sql` directory. I.E. Windows = `C:\Users\Ian\s3sql\credentials` MacOS = `/Users/Ian/s3sql`
+> [!TIP]
+> Credentials are stored in the `~/s3sql` directory. I.E. Windows = `C:\Users\Ian\s3sql\credentials` MacOS = `/Users/Ian/s3sql`
 
 5. List objects available. For example, to list the objects in the bucket named: `osg-repo-scan-data`:
 
@@ -57,19 +57,20 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
    This command returns a formatted table of the objects available in the bucket:
    ```bash
    +------------------------------------------+---------------------------+------------------------------------+---------------------+--------+----------------+
-| Key                                      | LastModified              | ETag                               | ChecksumAlgorithm   |   Size |StorageClass   |
-+==========================================+===========================+====================================+=====================+========+================+
-| folder_example/                          | 2025-06-13 01:22:05+00:00 | "d41d8cd98f00b204e9800998ecf8427e" | ['CRC64NVME']       |      0 | STANDARD       |
-+------------------------------------------+---------------------------+------------------------------------+---------------------+--------+----------------+
-| folder_example/sql_database_releases.csv | 2025-06-13 01:57:02+00:00 | "90089983c8e30097002094756b5f7478" | ['CRC64NVME']       |    438 | STANDARD       |
-+------------------------------------------+---------------------------+------------------------------------+---------------------+--------+----------------+
-| sql_database_features.csv                | 2025-06-13 01:45:38+00:00 | "8a46b42d596d9310bcd4ac9db14df718" | ['CRC64NVME']       |   1991 | STANDARD       |
-+------------------------------------------+---------------------------+------------------------------------+---------------------+--------+----------------+
-| sql_engines.csv                          | 2025-06-13 01:21:49+00:00 | "586f00530a11fcbb46c244210f625292" | ['CRC64NVME']       |    407 | STANDARD       |
-+------------------------------------------+---------------------------+------------------------------------+---------------------+--------+----------------+
-| sql_user_base.csv                        | 2025-06-13 01:45:58+00:00 | "ff5e96d2ca7f3475dc38c537cc1f6c36" | ['CRC64NVME']       |    597 | STANDARD       |
-+------------------------------------------+---------------------------+------------------------------------+---------------------+--------+----------------+
-```
+   | Key                                      | LastModified              | ETag                               | ChecksumAlgorithm   |   Size |StorageClass   |
+   +==========================================+===========================+====================================+=====================+========+================+
+   | folder_example/                          | 2025-06-13 01:22:05+00:00 | "d41d8cd98f00b204e9800998ecf8427e" | ['CRC64NVME']       |      0 | STANDARD       |
+   +------------------------------------------+---------------------------+------------------------------------+---------------------+--------+----------------+
+   | folder_example/sql_database_releases.csv | 2025-06-13 01:57:02+00:00 | "90089983c8e30097002094756b5f7478" | ['CRC64NVME']       |    438 | STANDARD       |
+   +------------------------------------------+---------------------------+------------------------------------+---------------------+--------+----------------+
+   | sql_database_features.csv                | 2025-06-13 01:45:38+00:00 | "8a46b42d596d9310bcd4ac9db14df718" | ['CRC64NVME']       |   1991 | STANDARD       |
+   +------------------------------------------+---------------------------+------------------------------------+---------------------+--------+----------------+
+   | sql_engines.csv                          | 2025-06-13 01:21:49+00:00 | "586f00530a11fcbb46c244210f625292" | ['CRC64NVME']       |    407 | STANDARD       |
+   +------------------------------------------+---------------------------+------------------------------------+---------------------+--------+----------------+
+   | sql_user_base.csv                        | 2025-06-13 01:45:58+00:00 | "ff5e96d2ca7f3475dc38c537cc1f6c36" | ['CRC64NVME']       |    597 | STANDARD       |
+   +------------------------------------------+---------------------------+------------------------------------+---------------------+--------+----------------+
+   ```
+
 6. Query an object with the following command:
 
    ```bash
