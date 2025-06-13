@@ -49,6 +49,7 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
 
 > [!TIP]
 > Credentials are stored in the `~/s3sql` directory. 
+>
 > I.E. Windows = `C:\Users\Ian\s3sql\credentials` 
 > MacOS = `/Users/Ian/s3sql`
 
