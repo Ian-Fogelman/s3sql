@@ -7,6 +7,7 @@ import duckdb
 from tabulate import tabulate
 import boto3
 import pandas as pd
+import time
 
 # Define the config file path
 CONFIG_DIR = os.path.expanduser("~/s3sql") #C:\Users\<YourUsername>\s3sql\ | MacOS ...
@@ -81,7 +82,9 @@ def get_secret():
 @cli.command()
 @click.option('--uri', prompt='Enter a quoted S3 URI for the object', hide_input=True, help='Example: s3://osg-repo-scan-data/branches.csv')
 @click.option('--query', prompt='Enter a quoted SQL query for the data returned from the object', hide_input=True, help='Example: SELECT * FROM df WHERE ID > 1')
-def query(uri,query):
+@click.option('--out', default=None, hide_input=True, help='Example: output.csv') #no "prompt", makes optional, only set if writing to file.
+def query(uri,query,out):
+    start = time.time()
     """Query an object stored in S3."""
     config = get_config()
     api_key = config['DEFAULT'].get('api_key', None)
@@ -99,7 +102,12 @@ def query(uri,query):
     q = "SELECT * FROM read_csv('{uri}');".format(uri=uri)
     df = conn.execute(q).df()
     df = duckdb.query(query).df()
+    end = time.time()
+    click.echo(f"Query' executed in {end - start:.4f} seconds")
     print(tabulate(df, headers='keys', tablefmt='grid', showindex=False)) #psql, grid, plain, fancy_grid
+    if out:
+        df.to_csv(out)
+        print(f'Data successfully written to file: {out}')
     return df
 
 @cli.command()
