@@ -64,6 +64,7 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
 
    This command returns a formatted table of the objects available in the bucket:
    ```bash
+   Query executed in 0.3216 seconds
    +------------------------------------------+---------------------------+------------------------------------+---------------------+--------+----------------+
    | Key                                      | LastModified              | ETag                               | ChecksumAlgorithm   |   Size |StorageClass   |
    +==========================================+===========================+====================================+=====================+========+================+
@@ -88,6 +89,7 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
    This command returns a formatted table of the data from the specified object:
 
    ```bash
+   Query executed in 0.4116 seconds
    +------+---------------+-----------+--------------------+-------------------------------------+-------------------------+
    |   Id | engine_name   |   version | license_type       | developer                           | primary_use_case        |
    +======+===============+===========+====================+=====================================+=========================+
@@ -111,6 +113,7 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
 
    This command returns a formatted table of the data from the specified object:
    ```bash
+   Query executed in 0.3426 seconds
    +------+---------------+-----------+----------------+-----------------+--------------------+
    |   Id | engine_name   |   version | license_type   | developer       | primary_use_case   |
    +======+===============+===========+================+=================+====================+
@@ -118,7 +121,25 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
    +------+---------------+-----------+----------------+-----------------+--------------------+
    ```
 
-7. Query an object within the `folder_example` folder with the following command:
+7. Query an object and output the query results to a file with the following command:
+
+   ```bash
+   s3sql query --uri "s3://s3sql-demo/folder_example/sql_database_releases.csv" --query "SELECT * FROM df WHERE 1=1 LIMIT 1" --out "output.csv"
+   ```
+
+   This command returns a formatted table of the data with an additional message specifying the filename the data was written to:
+
+   ```
+   Query executed in 0.3414 seconds
+   +---------------+------------------------+-----------------+-----------------------+--------------------------+
+   | engine_name   |   initial_release_year | designer        | organization          | current_stable_version   |
+   +===============+========================+=================+=======================+==========================+
+   | SQLite        |                   2000 | D. Richard Hipp | Hipp Wyrick & Company | 3.50.1                   |
+   +---------------+------------------------+-----------------+-----------------------+--------------------------+
+   Data successfully written to file: output.csv
+   ```
+
+8. Query an object within the `folder_example` folder with the following command:
 
    ```bash
    s3sql query --uri "s3://s3sql-demo/folder_example/sql_database_releases.csv" --query "SELECT * FROM df WHERE 1=1"
