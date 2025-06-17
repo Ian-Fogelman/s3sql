@@ -103,11 +103,11 @@ def query(uri,query,out):
     df = conn.execute(q).df()
     df = duckdb.query(query).df()
     end = time.time()
-    click.echo(f"Query' executed in {end - start:.4f} seconds")
-    print(tabulate(df, headers='keys', tablefmt='grid', showindex=False)) #psql, grid, plain, fancy_grid
+    click.echo(f"Query executed in {end - start:.4f} seconds")
+    click.echo(tabulate(df, headers='keys', tablefmt='grid', showindex=False)) #psql, grid, plain, fancy_grid
     if out:
         df.to_csv(out)
-        print(f'Data successfully written to file: {out}')
+        click.echo(f'Data successfully written to file: {out}')
     return df
 
 @cli.command()
@@ -125,8 +125,8 @@ def ls(bucket):
         response = client.list_objects_v2(Bucket=bucket)
         if 'Contents' in response:
             df = pd.DataFrame(response['Contents'])
-            print(tabulate(df, headers='keys', tablefmt='grid', showindex=False))
+            click.echo(tabulate(df, headers='keys', tablefmt='grid', showindex=False))
         else:
-            print("No objects found in the bucket.")
+            click.echo("No objects found in the bucket.")
     except Exception as e:
-        print(f"Error: {e}")
+        click.echo(f"Error: {e}")
