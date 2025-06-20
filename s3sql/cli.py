@@ -8,6 +8,7 @@ from tabulate import tabulate
 import boto3
 import pandas as pd
 import time
+from pathlib import Path
 
 # Define the config file path
 CONFIG_DIR = os.path.expanduser("~/s3sql") #C:\Users\<YourUsername>\s3sql\ | MacOS ...
@@ -33,6 +34,16 @@ def mask_string(input_string): #show only the first 3 and last 3 characters of s
         return "*" * len(input_string)
     masked_string = input_string[:3] + "*" * (len(input_string) - 6) + input_string[-3:]
     return masked_string
+
+def detect_file(ext):
+    if ext == ".csv":
+        return {'ext':'.csv','read_method':'read_csv'}
+    elif ext == ".json":
+        return {'ext':'.json','read_method':'read_json'}
+    elif ext == ".parquet":
+        return {'ext':'.parquet','read_method':'read_parquet'}
+    else:
+        return "Read file type not supported, please try again with either a .csv, .json, or .parquet file extension."
 
 @click.group()
 def cli():
@@ -99,15 +110,30 @@ def query(uri,query,out):
                  SECRET '{secret}',
                  REGION 'us-east-1');
                 """.format(key=api_key,secret=api_secret))
-    q = "SELECT * FROM read_csv('{uri}');".format(uri=uri)
+    ext = Path(uri).suffix
+    details = detect_file(ext)
+    ext = details['ext']
+    rm = details['read_method']
+    #q = "SELECT * FROM read_csv('{uri}');".format(uri=uri)
+    q = "SELECT * FROM {read}('{uri}');".format(read=rm,uri=uri)
     df = conn.execute(q).df()
     df = duckdb.query(query).df()
     end = time.time()
     click.echo(f"Query executed in {end - start:.4f} seconds")
     click.echo(tabulate(df, headers='keys', tablefmt='grid', showindex=False)) #psql, grid, plain, fancy_grid
     if out:
-        df.to_csv(out)
-        click.echo(f'Data successfully written to file: {out}')
+        out_ext = Path(out).suffix
+        if(out_ext == '.csv'):
+            df.to_csv(out)
+            click.echo(f'Data successfully written to file: {out}')
+        elif(out_ext == '.json'):
+            df.to_json(out)
+            click.echo(f'Data successfully written to file: {out}')
+        elif(out_ext == '.parquet'):
+            df.to_parquet(out)
+            click.echo(f'Data successfully written to file: {out}')
+        else:
+            print("--out file type not supported, please try again with either a .csv, .json, or .parquet file extension.")
     return df
 
 @cli.command()
