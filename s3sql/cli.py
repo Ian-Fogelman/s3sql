@@ -3,6 +3,7 @@ import requests
 import json
 import configparser
 import os
+import toml
 import duckdb
 from tabulate import tabulate
 import boto3
@@ -45,11 +46,26 @@ def detect_file(ext):
     else:
         return "Read file type not supported, please try again with either a .csv, .json, or .parquet file extension."
 
+def get_version():
+    rute= Path(__file__).resolve().parent.parent / "pyproject.toml" #acces the file when the program is not executed from the root file
+    with open(rute, 'r') as f: config = toml.load(f)
+    msg = f"v{config['tool']['poetry']['version']}"
+    click.echo(msg)
+    return msg
+
+
 @click.group()
 def cli():
     """The S3SQL CLI, the simplest way to query your S3 objects."""
     pass
 
+@cli.command()
+@click.version_option(version=get_version())
+def get_version():
+    """Retrive the actuall version"""
+    pass
+    
+    
 @cli.command()
 @click.option('--api-key', prompt='Enter API key', hide_input=True, help='Set the API key.')
 def set_key(api_key):
