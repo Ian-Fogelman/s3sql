@@ -8,3 +8,9 @@ dist/
 .env
 __pycache__
 notes.txt
+.vscode/settings.json
+
+#test output files
+output.csv
+output.json
+output.parquet
