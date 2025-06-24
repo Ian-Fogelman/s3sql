@@ -114,7 +114,6 @@ def query(uri,query,out):
     details = detect_file(ext)
     ext = details['ext']
     rm = details['read_method']
-    #q = "SELECT * FROM read_csv('{uri}');".format(uri=uri)
     q = "SELECT * FROM {read}('{uri}');".format(read=rm,uri=uri)
     df = conn.execute(q).df()
     df = duckdb.query(query).df()
