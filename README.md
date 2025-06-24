@@ -181,7 +181,8 @@ project/
 
 ## Testing
 
-- Use the PyTest VS code extension or the following command to run all tests `pytest -s s3sql/test_cli.py`:
+- Use the [PyTest VS code](https://code.visualstudio.com/docs/python/testing) extension or the following command to run all tests `pytest -s s3sql/test_cli.py`:
+
   ![image](https://github.com/user-attachments/assets/687b6894-779b-4fd1-8a53-17b6e143a25d)
 
 ## Contributing
