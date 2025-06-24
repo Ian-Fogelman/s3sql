@@ -66,9 +66,13 @@ def get_key():
     api_key = config['DEFAULT'].get('api_key', None)
     if api_key:
         masked_key = mask_string(api_key)
-        click.echo(f"Stored API key: {masked_key}")
+        msg = f"Stored API key: {masked_key}"
+        click.echo(msg)
+        return msg
     else:
-        click.echo("No API key set. Use 'set-key' to set one.")
+        msg = "No API key set. Use 's3sql set-key' to set one."
+        click.echo(msg)
+        return msg
 
 @cli.command()
 @click.option('--api-secret', prompt='Enter secret key', hide_input=True, help='Set the secret key.')
@@ -86,9 +90,13 @@ def get_secret():
     api_secret = config['DEFAULT'].get('api_secret', None)
     if api_secret:
         masked_secret = mask_string(api_secret)
-        click.echo(f"Stored API secret: {masked_secret}")
+        msg = "Stored API secret: {masked_secret}"
+        click.echo(msg)
+        return msg
     else:
-        click.echo("No API key set. Use 'set-key' to set one.")
+        msg = "No API secret set. Use 's3sql set-secret' to set one."
+        click.echo(msg)
+        return msg
 
 @cli.command()
 @click.option('--uri', prompt='Enter a quoted S3 URI for the object', hide_input=True, help='Example: s3://osg-repo-scan-data/branches.csv')
