@@ -171,12 +171,18 @@ project/
 │   └── s3sql-*.*.*.tar.gz
 ├── s3sql/
 │   └── cli.py
+│   └── test_cli.py
 ├── .env
 ├── .gitignore
 ├── mycli.spec
 ├── poetry.lock
 └── README.md
 ```
+
+## Testing
+
+- Use the PyTest VS code extension or the following command to run all tests `pytest -s s3sql/test_cli.py`:
+  ![image](https://github.com/user-attachments/assets/687b6894-779b-4fd1-8a53-17b6e143a25d)
 
 ## Contributing
 1. Fork the repository
