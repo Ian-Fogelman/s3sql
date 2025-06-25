@@ -10,7 +10,7 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
 
 ## Demo
 
-![s3sql](https://github.com/user-attachments/assets/1069c9e2-1c9b-4c27-a4b7-16ae274c543d)
+![s3sql](https://github.com/user-attachments/assets/8fc57375-0498-4f0b-ae2f-f90a94452dca)
 
 ## Installation
 1. Install with:
