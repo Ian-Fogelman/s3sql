@@ -24,10 +24,10 @@ def test_get_secret():
     assert('Stored API secret:' in result_str)
 
 def test_query_csv():
-    #s3sql query --uri "s3://s3sql-demo/folder_example/sql_database_releases.csv" --query "SELECT * FROM df WHERE 1=1 LIMIT 1" --out "output.csv"
+    #s3sql query --uri "s3://s3sql-demo/folder_example/sql_database_releases.csv" --sql "SELECT * FROM df WHERE 1=1 LIMIT 1" --out "output.csv"
     output_file = 'output.csv'
     result = runner.invoke(query, ['--uri','s3://s3sql-demo/sql_engines.csv',
-                                   '--query','SELECT * FROM df WHERE 1=1',
+                                   '--sql','SELECT * FROM df WHERE 1=1',
                                    '--out',output_file])
     result_str = result.output
     df = pd.read_csv('output.csv')
@@ -35,10 +35,10 @@ def test_query_csv():
     assert(check_result_message(result_str) == True)
 
 def test_query_json():
-    #s3sql query --uri "s3://s3sql-demo/json/database_default_ports.json" --query "SELECT * FROM df WHERE 1=1" --out "output.json"
+    #s3sql query --uri "s3://s3sql-demo/json/database_default_ports.json" --sql "SELECT * FROM df WHERE 1=1" --out "output.json"
     output_file = 'output.json'
     result = runner.invoke(query, ['--uri','s3://s3sql-demo/json/database_default_ports.json',
-                                   '--query','SELECT * FROM df WHERE 1=1',
+                                   '--sql','SELECT * FROM df WHERE 1=1',
                                    '--out',output_file])
     result_str = result.output
     df = pd.read_json(output_file)
@@ -46,10 +46,10 @@ def test_query_json():
     assert(check_result_message(result_str) == True)
 
 def test_query_parquet():
-    #s3sql query --uri "s3://s3sql-demo/parquet/database_features.parquet" --query "SELECT * FROM df WHERE 1=1" --out "output.parquet"
+    #s3sql query --uri "s3://s3sql-demo/parquet/database_features.parquet" --sql "SELECT * FROM df WHERE 1=1" --out "output.parquet"
     output_file = 'output.parquet'
     result = runner.invoke(query, ['--uri','s3://s3sql-demo/parquet/database_features.parquet',
-                                   '--query','SELECT * FROM df WHERE 1=1',
+                                   '--sql','SELECT * FROM df WHERE 1=1',
                                    '--out',output_file])
     result_str = result.output
     df = pd.read_parquet(output_file)

@@ -10,7 +10,7 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
 
 ## Demo
 
-![s3sql](https://github.com/user-attachments/assets/90df0ae1-52b2-4b6b-aa9f-21421a73a7f5)
+![s3sql](https://github.com/user-attachments/assets/8fc57375-0498-4f0b-ae2f-f90a94452dca)
 
 ## Installation
 1. Install with:
@@ -83,7 +83,7 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
 6. Query an object with the following command:
 
    ```bash
-   s3sql query --uri "s3://s3sql-demo/sql_engines.csv" --query "SELECT * FROM df WHERE 1=1"
+   s3sql query --uri "s3://s3sql-demo/sql_engines.csv" --sql "SELECT * FROM df WHERE 1=1"
    ```
 
    This command returns a formatted table of the data from the specified object:
@@ -108,7 +108,7 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
    Apply a `LIMIT 1` to the previous query:
 
    ```bash
-   s3sql query --uri "s3://s3sql-demo/sql_engines.csv" --query "SELECT * FROM df WHERE 1=1 LIMIT 1"
+   s3sql query --uri "s3://s3sql-demo/sql_engines.csv" --sql "SELECT * FROM df WHERE 1=1 LIMIT 1"
    ```
 
    This command returns a formatted table of the data from the specified object:
@@ -124,7 +124,7 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
 7. Query an object and output the query results to a file with the following command:
 
    ```bash
-   s3sql query --uri "s3://s3sql-demo/folder_example/sql_database_releases.csv" --query "SELECT * FROM df WHERE 1=1 LIMIT 1" --out "output.csv"
+   s3sql query --uri "s3://s3sql-demo/folder_example/sql_database_releases.csv" --sql "SELECT * FROM df WHERE 1=1 LIMIT 1" --out "output.csv"
    ```
 
    This command returns a formatted table of the data with an additional message specifying the filename the data was written to:
@@ -142,12 +142,13 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
 8. Query an object within the `folder_example` folder with the following command:
 
    ```bash
-   s3sql query --uri "s3://s3sql-demo/folder_example/sql_database_releases.csv" --query "SELECT * FROM df WHERE 1=1"
+   s3sql query --uri "s3://s3sql-demo/folder_example/sql_database_releases.csv" --sql "SELECT * FROM df WHERE 1=1"
    ```
 
    This command returns a formatted table of the data from the specified object:
 
    ```bash
+   Query executed in 0.3591 seconds
    +---------------+------------------------+-------------------------------------+------------------------------------+--------------------------+
    | engine_name   |   initial_release_year | designer                            | organization                       | current_stable_version   |
    +===============+========================+=====================================+====================================+==========================+
@@ -163,9 +164,57 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
    +---------------+------------------------+-------------------------------------+------------------------------------+--------------------------+
    ```
 
+9. Query an object and save the output to your local file system using the following command:
+
+   ```bash
+   s3sql query --uri "s3://s3sql-demo/folder_example/sql_database_releases.csv" --sql "SELECT * FROM df WHERE 1=1 LIMIT 1" --out "output.csv"
+   ```
+
+   This command returns a formatted table of the data from the specified object and an additional `Data successfully written to file: output.csv`:
+
+   ```bash
+   Query executed in 0.3391 seconds
+   +---------------+------------------------+-------------------------------------+------------------------------------+--------------------------+
+   | engine_name   |   initial_release_year | designer                            | organization                       | current_stable_version   |
+   +===============+========================+=====================================+====================================+==========================+
+   | SQLite        |                   2000 | D. Richard Hipp                     | Hipp Wyrick & Company              | 3.50.1                   |
+   +---------------+------------------------+-------------------------------------+------------------------------------+--------------------------+
+   | PostgreSQL    |                   1986 | Michael Stonebraker                 | University of California  Berkeley | 16.4                     |
+   +---------------+------------------------+-------------------------------------+------------------------------------+--------------------------+
+   | MySQL         |                   1995 | Michael Widenius and David Axmark   | MySQL AB                           | 8.4                      |
+   +---------------+------------------------+-------------------------------------+------------------------------------+--------------------------+
+   | SQLServer     |                   1989 | Donald Chamberlin and Raymond Boyce | Microsoft Corporation              | 2022                     |
+   +---------------+------------------------+-------------------------------------+------------------------------------+--------------------------+
+   | DuckDB        |                   2019 | Mark Raasveldt and Hannes Muhleisen | Centrum Wiskunde & Informatica     | 1.0.0                    |
+   +---------------+------------------------+-------------------------------------+------------------------------------+--------------------------+
+   Data successfully written to file: output.csv
+   ```
+
+10. Query a `.csv` object and convert it to a `.parquet` file with the following command:
+
+   ```bash
+   s3sql query --uri "s3://s3sql-demo/sql_engines.csv" --sql "SELECT * FROM df WHERE 1=1 LIMIT 1" --out "output.parquet"
+   ```
+
+   This command returns a formatted table of the data from the specified object and an additional `Data successfully written to file: output.parquet`:
+
+   ```bash
+   Query executed in 0.3399 seconds
+   +------+---------------+-----------+----------------+-----------------+--------------------+
+   |   Id | engine_name   |   version | license_type   | developer       | primary_use_case   |
+   +======+===============+===========+================+=================+====================+
+   |    1 | SQLite        |      3.46 | Public Domain  | D. Richard Hipp | Embedded systems   |
+   +------+---------------+-----------+----------------+-----------------+--------------------+
+   Data successfully written to file: output.parquet
+   ```
+
 ## Directory Structure
+
 ```
 project/
+├── .github/
+│   └── workflows/
+│       └── publish.yml
 ├── dist/
 │   └── s3sql-*.*.*-py3-none-any.whl
 │   └── s3sql-*.*.*.tar.gz
@@ -185,6 +234,10 @@ project/
 
   ![image](https://github.com/user-attachments/assets/687b6894-779b-4fd1-8a53-17b6e143a25d)
 
+## Github
+
+https://github.com/Ian-Fogelman/s3sql
+
 ## Contributing
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/your-feature`)
@@ -197,6 +250,7 @@ project/
 ## PyPI
 
 https://pypi.org/project/s3sql/
+
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

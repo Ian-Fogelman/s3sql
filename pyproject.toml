@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "s3sql"
-version = "0.0.2"
+version = "0.0.3"
 
 description = "A simple CLI to query cloud storage objects with SQL."
 authors = ["Ian Fogelman <IanFogelman@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 click = "^8.1.3"
 requests = "^2.32.3"
 duckdb = "^1.0.0"
