@@ -83,7 +83,7 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
 6. Query an object with the following command:
 
    ```bash
-   s3sql query --uri "s3://s3sql-demo/sql_engines.csv" --query "SELECT * FROM df WHERE 1=1"
+   s3sql query --uri "s3://s3sql-demo/sql_engines.csv" --sql "SELECT * FROM df WHERE 1=1"
    ```
 
    This command returns a formatted table of the data from the specified object:
@@ -108,7 +108,7 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
    Apply a `LIMIT 1` to the previous query:
 
    ```bash
-   s3sql query --uri "s3://s3sql-demo/sql_engines.csv" --query "SELECT * FROM df WHERE 1=1 LIMIT 1"
+   s3sql query --uri "s3://s3sql-demo/sql_engines.csv" --sql "SELECT * FROM df WHERE 1=1 LIMIT 1"
    ```
 
    This command returns a formatted table of the data from the specified object:
@@ -124,7 +124,7 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
 7. Query an object and output the query results to a file with the following command:
 
    ```bash
-   s3sql query --uri "s3://s3sql-demo/folder_example/sql_database_releases.csv" --query "SELECT * FROM df WHERE 1=1 LIMIT 1" --out "output.csv"
+   s3sql query --uri "s3://s3sql-demo/folder_example/sql_database_releases.csv" --sql "SELECT * FROM df WHERE 1=1 LIMIT 1" --out "output.csv"
    ```
 
    This command returns a formatted table of the data with an additional message specifying the filename the data was written to:
@@ -142,7 +142,7 @@ S3SQL is a lightweight command line utility for querying data stored in s3.
 8. Query an object within the `folder_example` folder with the following command:
 
    ```bash
-   s3sql query --uri "s3://s3sql-demo/folder_example/sql_database_releases.csv" --query "SELECT * FROM df WHERE 1=1"
+   s3sql query --uri "s3://s3sql-demo/folder_example/sql_database_releases.csv" --sql "SELECT * FROM df WHERE 1=1"
    ```
 
    This command returns a formatted table of the data from the specified object:

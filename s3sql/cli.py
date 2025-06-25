@@ -100,9 +100,9 @@ def get_secret():
 
 @cli.command()
 @click.option('--uri', prompt='Enter a quoted S3 URI for the object', hide_input=True, help='Example: s3://osg-repo-scan-data/branches.csv')
-@click.option('--query', prompt='Enter a quoted SQL query for the data returned from the object', hide_input=True, help='Example: SELECT * FROM df WHERE ID > 1')
+@click.option('--sql', prompt='Enter a quoted SQL query for the data returned from the object', hide_input=True, help='Example: SELECT * FROM df WHERE ID > 1')
 @click.option('--out', default=None, hide_input=True, help='Example: output.csv') #no "prompt", makes optional, only set if writing to file.
-def query(uri,query,out):
+def query(uri,sql,out):
     start = time.time()
     """Query an object stored in S3."""
     config = get_config()
@@ -124,7 +124,7 @@ def query(uri,query,out):
     rm = details['read_method']
     q = "SELECT * FROM {read}('{uri}');".format(read=rm,uri=uri)
     df = conn.execute(q).df()
-    df = duckdb.query(query).df()
+    df = duckdb.query(sql).df()
     end = time.time()
     click.echo(f"Query executed in {end - start:.4f} seconds")
     click.echo(tabulate(df, headers='keys', tablefmt='grid', showindex=False)) #psql, grid, plain, fancy_grid
