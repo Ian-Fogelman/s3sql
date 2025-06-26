@@ -3,13 +3,14 @@ import requests
 import json
 import configparser
 import os
-import toml
 import duckdb
 from tabulate import tabulate
 import boto3
 import pandas as pd
 import time
 from pathlib import Path
+
+from importlib.metadata import version
 
 # Define the config file path
 CONFIG_DIR = os.path.expanduser("~/s3sql") #C:\Users\<YourUsername>\s3sql\ | MacOS ...
@@ -45,26 +46,19 @@ def detect_file(ext):
         return {'ext':'.parquet','read_method':'read_parquet'}
     else:
         return "Read file type not supported, please try again with either a .csv, .json, or .parquet file extension."
-
+    
 def get_version():
-    rute= Path(__file__).resolve().parent.parent / "pyproject.toml" #acces the file when the program is not executed from the root file
-    with open(rute, 'r') as f: config = toml.load(f)
-    msg = f"v{config['tool']['poetry']['version']}"
-    click.echo(msg)
-    return msg
+    return version("s3sql")
+
 
 
 @click.group()
+@click.version_option(version=get_version())
 def cli():
     """The S3SQL CLI, the simplest way to query your S3 objects."""
     pass
 
-@cli.command()
-@click.version_option(version=get_version())
-def get_version():
-    """Retrive the actuall version"""
-    pass
-    
+
     
 @cli.command()
 @click.option('--api-key', prompt='Enter API key', hide_input=True, help='Set the API key.')

@@ -1,8 +1,9 @@
 #pytest -s s3sql/test_cli.py
+import re
 import pytest
 import pandas as pd
 from click.testing import CliRunner
-from cli import get_key,get_secret,query
+from cli import get_key,get_secret,query, cli
 runner = CliRunner()
 
 def check_result_message(result_str):
@@ -10,6 +11,12 @@ def check_result_message(result_str):
         return True
     else:
         return False
+    
+
+def test_get_version_flag():
+    result = runner.invoke(cli, ['--version'])
+    result_str = result.output
+    assert re.match(r'^s3sql, version \d+\.\d+\.\d+$', result_str.strip())
 
 def test_get_key():
     #s3sql get-key
