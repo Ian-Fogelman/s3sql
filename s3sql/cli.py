@@ -48,7 +48,8 @@ def detect_file(ext):
         return "Read file type not supported, please try again with either a .csv, .json, or .parquet file extension."
     
 def get_version():
-    return version("s3sql")
+    v = version("s3sql")
+    return v
 
 
 
