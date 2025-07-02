@@ -103,8 +103,8 @@ def get_secret():
 @click.option('--sql', prompt='Enter a quoted SQL query for the data returned from the object', hide_input=True, help='Example: SELECT * FROM df WHERE ID > 1')
 @click.option('--out', default=None, hide_input=True, help='Example: output.csv') #no "prompt", makes optional, only set if writing to file.
 def query(uri,sql,out):
-    start = time.time()
     """Query an object stored in S3."""
+    start = time.time()
     config = get_config()
     api_key = config['DEFAULT'].get('api_key', None)
     api_secret = config['DEFAULT'].get('api_secret', None)
@@ -146,6 +146,7 @@ def query(uri,sql,out):
 @cli.command()
 @click.option('--bucket', prompt='Enter a S3 bucket name.', hide_input=True, help='Example: s3://osg-repo-scan-data/ -> "osg-repo-scan-data"')
 def ls(bucket):
+    """List bucket objects."""
     config = get_config()
     api_key = config['DEFAULT'].get('api_key', None)
     api_secret = config['DEFAULT'].get('api_secret', None)
