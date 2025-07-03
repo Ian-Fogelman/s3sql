@@ -51,16 +51,12 @@ def get_version():
     v = version("s3sql")
     return v
 
-
-
 @click.group()
 @click.version_option(version=get_version())
 def cli():
     """The S3SQL CLI, the simplest way to query your S3 objects."""
     pass
 
-
-    
 @cli.command()
 @click.option('--api-key', prompt='Enter API key', hide_input=True, help='Set the API key.')
 def set_key(api_key):
