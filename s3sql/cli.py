@@ -10,6 +10,8 @@ import pandas as pd
 import time
 from pathlib import Path
 
+from importlib.metadata import version
+
 # Define the config file path
 CONFIG_DIR = os.path.expanduser("~/s3sql") #C:\Users\<YourUsername>\s3sql\ | MacOS ...
 CONFIG_FILE = os.path.join(CONFIG_DIR, "credentials") #Windows: ...\credentials | MacOS ...
@@ -44,12 +46,21 @@ def detect_file(ext):
         return {'ext':'.parquet','read_method':'read_parquet'}
     else:
         return "Read file type not supported, please try again with either a .csv, .json, or .parquet file extension."
+    
+def get_version():
+    v = version("s3sql")
+    return v
+
+
 
 @click.group()
+@click.version_option(version=get_version())
 def cli():
     """The S3SQL CLI, the simplest way to query your S3 objects."""
     pass
 
+
+    
 @cli.command()
 @click.option('--api-key', prompt='Enter API key', hide_input=True, help='Set the API key.')
 def set_key(api_key):
