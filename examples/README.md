@@ -1,0 +1,1 @@
+This directory contains practical examples how how to use s3sql.
