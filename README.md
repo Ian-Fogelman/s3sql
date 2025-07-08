@@ -1,5 +1,9 @@
 # S3SQL
 
+[![PyPi](https://img.shields.io/pypi/v/s3sql?label=PyPI&color=yellow)](https://pypi.org/project/s3sql/)
+[![Downloads](https://static.pepy.tech/badge/s3sql)](https://pepy.tech/project/s3sql)
+[![Downloads](https://static.pepy.tech/badge/s3sql/month)](https://pepy.tech/project/s3sql)
+
 ## Overview
 S3SQL is a lightweight command line utility for querying data stored in s3.
 
